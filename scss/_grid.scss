@@ -1,0 +1,156 @@
+
+
+$cellRows: 11;
+$cellColumns: 11;
+
+$cellHeight: 200px;
+$cellWidth: 200px;
+
+
+@mixin gradient($color1, $color2) { 
+  background: $color1; /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  $color2 0%, $color1 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  $color2 0%,$color1 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  $color2 0%,$color1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color2', endColorstr='$color1',GradientType=1 ); /* IE6-9 */
+}
+
+body {
+  // overflow: hidden;
+  position: relative;
+  background-color: $rock;
+  width: 100%;
+  height: 100%;
+}
+
+.hud {
+  position: fixed;
+  z-index: 1;
+  top: 1rem;
+  left: 1rem;
+  width: 125px;
+  background: $white;
+  color: $black;
+  border: solid gray;
+  border-width: 1px 1px 0;
+  transition: all 0.3s ease;
+  > div {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid gray;
+    span {float:right;}
+  }
+  &.gameOver {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+  }
+}
+
+.grid-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  &.zoomOut {  
+    zoom: 0.35; 
+    -moz-transform: scale(.35); 
+    -moz-transform-origin: 0 0;
+  }
+}
+
+.grid {
+  background-color: $black;
+  color: $black;
+  text-shadow: 1px 1px 1px $white;
+  position: absolute;
+  min-width: $cellWidth * $cellColumns;
+  min-height: $cellHeight * $cellRows;
+  top: 50%;
+  left: 50%;
+  transform: translate(-($cellWidth * $cellColumns)/2, -($cellHeight * $cellRows)/2);
+  .cell {
+    position: relative;
+    // top: 0;
+    // left: 0;
+    // width: calc(100% / 11);
+    // height: calc(100% / 11);    
+    width: $cellWidth;
+    height: $cellHeight;
+    display: inline-block;
+    float: left;
+    // clear: none;
+    background-color: $white;
+    background-repeat: no-repeat;
+    // background-size: contain;
+    background-size: 75px;
+    background-position: center;    
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba($black, 0.5);
+      content: '';
+    }
+
+    &.unseen:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: $dark;
+      content: '';
+    }
+
+    &:nth-child(11n+1) {
+      clear: both;
+    }
+    // &:nth-child(61):after {
+    //   background-color: green;
+    // }
+
+
+    &.seen {
+      opacity: 0.5;
+      &:after {display:none;}
+    }
+
+    &.occupied:after {
+      display: none;
+    }
+
+    &.rock {
+      background-color: $rock;
+      background-size: cover;
+      background-image: url(http://img11.deviantart.net/4ebc/i/2005/160/a/f/stone_texture_by_enframed.jpg);
+    }
+    &.person {
+      background-image: url(https://cdn.pixabay.com/photo/2012/04/26/19/47/man-42934_960_720.png);
+    }
+    &.item {
+      background-image: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPMclYGKv4IjcSrLBBpF8OO8Y2E6_mNz5qd95z33NTCYE7zGcd);
+    }
+    &.resource {
+      &.stone {
+        background-image: url(http://upload.wikimedia.org/wikipedia/commons/8/80/Obsidienne_biface_ethiopie.jpg);
+      }
+      &.wood {
+        background-image: url(http://vignette2.wikia.nocookie.net/helmet-heroes/images/b/b3/Big_Stick.png/revision/latest?cb=20130712180109);
+      }
+    }
+    &.water {
+      background-color: $water;
+      background-size: cover;
+      background-image: url(http://bdcraft.net/img_gal/dQdovco.gif);
+    }
+    &.lava {
+      background-color: $lava;
+      background-size: cover;
+      background-image: url(http://cdn.pcwallart.com/images/lava-texture-wallpaper-1.jpg);
+    }
+  }
+}
