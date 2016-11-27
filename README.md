@@ -1,48 +1,23 @@
-# Foundation for Sites Template
+# Is this a game?
 
-**Please open all issues with this template on the main [Foundation for Sites](https://github.com/zurb/foundation-sites/issues) repo.**
+** Personal project to remind myself how to Google jQuery solutions. 
 
-This is the basic starter project for [Foundation for Sites 6](http://foundation.zurb.com/sites). It includes a Sass compiler and a starter HTML file for you.
+I'm using this format to find small jQuery solutions to use on other projects. Run functions on keyboard input. The UX involved with a character's health. I doubt I'll go into much detail but maybe I'll write comments in the js.
 
-## Installation
+The actual gameplay portion of this game (that I don't really want you to play) involves crafting items from basic resources, surviving, and exploring. I swear I've never "played" Minecraft. If anything, I'm going to ripe off elements of Don't Starve. That game is great. 
 
-To use this template, your computer needs:
+Obviously since this is hosted here you can read the source files and hack the game. I'll save you the trouble. In the console, these are the resources needed to craft anything. Change the amount you have. Change the maximum amount you can carry. Write a function where the lava restores max health. I really don't care. 
 
-- [NodeJS](https://nodejs.org/en/) (0.10 or greater)
-- [Git](https://git-scm.com/)
-
-This template can be installed with the Foundation CLI, or downloaded and set up manually.
-
-### Using the CLI
-
-Install the Foundation CLI with this command:
-
-```bash
-npm install foundation-cli --global
+```
+var energy = 100;
+var stick = 0;
+var max_stick = 10;
+var flint = 0;
+var max_flint = 10;
 ```
 
-Use this command to set up a blank Foundation for Sites project with this template:
+### Known Issues
 
-```bash
-foundation new --framework sites --template basic
-```
-
-The CLI will prompt you to give your project a name. The template will be downloaded into a folder with this name.
-
-### Manual Setup
-
-To manually set up the template, first download it with Git:
-
-```bash
-git clone https://github.com/zurb/foundation-sites-template projectname
-```
-
-Then open the folder in your command line, and install the needed dependencies:
-
-```bash
-cd projectname
-npm install
-bower install
-```
-
-Finally, run `npm start` to run the Sass compiler. It will re-run every time you save a Sass file.
+- Moving on and off a resource quickly will run the function multiple times, allowing you to collect more than the specified max amount of that resource. 
+- Max amount of a resource is inconsistent. Sometimes it's correct; sometimes it's one more than the setting. 
+- If your energy goes to 0, you have to make one more move to end the game.

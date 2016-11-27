@@ -23,12 +23,19 @@ body {
   height: 100%;
 }
 
+label {
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
 .hud {
   position: fixed;
   z-index: 1;
   top: 1rem;
   left: 1rem;
-  width: 125px;
+  width: 150px;
   background: $white;
   color: $black;
   border: solid gray;
@@ -36,8 +43,21 @@ body {
   transition: all 0.3s ease;
   > div {
     padding: 0.5rem 0.6rem;
-    border-bottom: 1px solid gray;
-    span {float:right;}
+    border-bottom: 1px solid $gray;
+  }
+  span {float:right;}
+  label {
+    text-align: center;
+    background-color: $light;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
+    li {
+      padding: 0.5rem 0.6rem;
+      border-top: 1px solid $gray;
+      cursor: pointer;
+    }
   }
   &.gameOver {
     top: 50%;
@@ -46,6 +66,33 @@ body {
     transition: all 0.3s ease;
   }
 }
+
+.console {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  width: 500px;
+  height: 100px;
+  z-index: 1;
+  overflow: hidden; 
+  label {
+    background-color: $light;
+    border-bottom: 1px solid $gray;
+    padding: 0.5rem 0.6rem;
+  }
+  .content {
+    padding: 0.5rem 0.6rem;
+    background-color: $white;
+    height: 62px;
+    overflow-y: scroll;
+  }
+  span {
+    display: block;
+    clear: both;
+    color: $dark;
+  }
+}
+
 
 .grid-wrapper {
   position: relative;
@@ -86,6 +133,29 @@ body {
     background-size: 75px;
     background-position: center;    
 
+    &:before {
+      position: absolute;
+      content: '';
+      display: block;
+      background-repeat: no-repeat;
+      top: 0;  
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-size: 40%;
+      background-position: center;
+      transition: all 0.3s ease;
+    }
+    &.occupied:before {
+      height: 40px;
+      width: 40px;
+      background-size: contain;
+      top: 10px;  
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+    }
+
     &:after {
       position: absolute;
       top: 0;
@@ -118,29 +188,22 @@ body {
       opacity: 0.5;
       &:after {display:none;}
     }
-
-    &.occupied:after {
-      display: none;
+    &.person:before {
+      background-image: url(https://cdn.pixabay.com/photo/2012/04/26/19/47/man-42934_960_720.png);
     }
-
+    &.item:before {
+      background-image: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPMclYGKv4IjcSrLBBpF8OO8Y2E6_mNz5qd95z33NTCYE7zGcd);
+    }
+    &.flint:before {
+      background-image: url(http://upload.wikimedia.org/wikipedia/commons/8/80/Obsidienne_biface_ethiopie.jpg);
+    }
+    &.stick:before {
+      background-image: url(http://vignette2.wikia.nocookie.net/helmet-heroes/images/b/b3/Big_Stick.png/revision/latest?cb=20130712180109);
+    }
     &.rock {
       background-color: $rock;
       background-size: cover;
       background-image: url(http://img11.deviantart.net/4ebc/i/2005/160/a/f/stone_texture_by_enframed.jpg);
-    }
-    &.person {
-      background-image: url(https://cdn.pixabay.com/photo/2012/04/26/19/47/man-42934_960_720.png);
-    }
-    &.item {
-      background-image: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPMclYGKv4IjcSrLBBpF8OO8Y2E6_mNz5qd95z33NTCYE7zGcd);
-    }
-    &.resource {
-      &.stone {
-        background-image: url(http://upload.wikimedia.org/wikipedia/commons/8/80/Obsidienne_biface_ethiopie.jpg);
-      }
-      &.wood {
-        background-image: url(http://vignette2.wikia.nocookie.net/helmet-heroes/images/b/b3/Big_Stick.png/revision/latest?cb=20130712180109);
-      }
     }
     &.water {
       background-color: $water;
@@ -151,6 +214,16 @@ body {
       background-color: $lava;
       background-size: cover;
       background-image: url(http://cdn.pcwallart.com/images/lava-texture-wallpaper-1.jpg);
+    }
+    &.occupied {
+      background-color: $white;
+      &:after {
+        background-size: 75px;
+        background-color: transparent;
+        background-image: url(https://cdn2.iconfinder.com/data/icons/little-girl/512/little_girl_orange.png);  
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
   }
 }

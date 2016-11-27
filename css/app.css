@@ -3282,12 +3282,18 @@ body {
   width: 100%;
   height: 100%; }
 
+label {
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase; }
+
 .hud {
   position: fixed;
   z-index: 1;
   top: 1rem;
   left: 1rem;
-  width: 125px;
+  width: 150px;
   background: white;
   color: black;
   border: solid gray;
@@ -3296,8 +3302,18 @@ body {
   .hud > div {
     padding: 0.5rem 0.6rem;
     border-bottom: 1px solid gray; }
-    .hud > div span {
-      float: right; }
+  .hud span {
+    float: right; }
+  .hud label {
+    text-align: center;
+    background-color: #ededed; }
+  .hud ul {
+    margin: 0;
+    list-style: none; }
+    .hud ul li {
+      padding: 0.5rem 0.6rem;
+      border-top: 1px solid gray;
+      cursor: pointer; }
   .hud.gameOver {
     top: 50%;
     left: 50%;
@@ -3305,6 +3321,28 @@ body {
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     transition: all 0.3s ease; }
+
+.console {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  width: 500px;
+  height: 100px;
+  z-index: 1;
+  overflow: hidden; }
+  .console label {
+    background-color: #ededed;
+    border-bottom: 1px solid gray;
+    padding: 0.5rem 0.6rem; }
+  .console .content {
+    padding: 0.5rem 0.6rem;
+    background-color: white;
+    height: 62px;
+    overflow-y: scroll; }
+  .console span {
+    display: block;
+    clear: both;
+    color: #333333; }
 
 .grid-wrapper {
   position: relative;
@@ -3338,6 +3376,28 @@ body {
     background-repeat: no-repeat;
     background-size: 75px;
     background-position: center; }
+    .grid .cell:before {
+      position: absolute;
+      content: '';
+      display: block;
+      background-repeat: no-repeat;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-size: 40%;
+      background-position: center;
+      transition: all 0.3s ease; }
+    .grid .cell.occupied:before {
+      height: 40px;
+      width: 40px;
+      background-size: contain;
+      top: 10px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+              transform: translateX(-50%);
+      transition: all 0.3s ease; }
     .grid .cell:after {
       position: absolute;
       top: 0;
@@ -3360,20 +3420,18 @@ body {
       opacity: 0.5; }
       .grid .cell.seen:after {
         display: none; }
-    .grid .cell.occupied:after {
-      display: none; }
+    .grid .cell.person:before {
+      background-image: url(https://cdn.pixabay.com/photo/2012/04/26/19/47/man-42934_960_720.png); }
+    .grid .cell.item:before {
+      background-image: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPMclYGKv4IjcSrLBBpF8OO8Y2E6_mNz5qd95z33NTCYE7zGcd); }
+    .grid .cell.flint:before {
+      background-image: url(http://upload.wikimedia.org/wikipedia/commons/8/80/Obsidienne_biface_ethiopie.jpg); }
+    .grid .cell.stick:before {
+      background-image: url(http://vignette2.wikia.nocookie.net/helmet-heroes/images/b/b3/Big_Stick.png/revision/latest?cb=20130712180109); }
     .grid .cell.rock {
       background-color: #f0e8c2;
       background-size: cover;
       background-image: url(http://img11.deviantart.net/4ebc/i/2005/160/a/f/stone_texture_by_enframed.jpg); }
-    .grid .cell.person {
-      background-image: url(https://cdn.pixabay.com/photo/2012/04/26/19/47/man-42934_960_720.png); }
-    .grid .cell.item {
-      background-image: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPMclYGKv4IjcSrLBBpF8OO8Y2E6_mNz5qd95z33NTCYE7zGcd); }
-    .grid .cell.resource.stone {
-      background-image: url(http://upload.wikimedia.org/wikipedia/commons/8/80/Obsidienne_biface_ethiopie.jpg); }
-    .grid .cell.resource.wood {
-      background-image: url(http://vignette2.wikia.nocookie.net/helmet-heroes/images/b/b3/Big_Stick.png/revision/latest?cb=20130712180109); }
     .grid .cell.water {
       background-color: #004466;
       background-size: cover;
@@ -3382,3 +3440,11 @@ body {
       background-color: #b30000;
       background-size: cover;
       background-image: url(http://cdn.pcwallart.com/images/lava-texture-wallpaper-1.jpg); }
+    .grid .cell.occupied {
+      background-color: white; }
+      .grid .cell.occupied:after {
+        background-size: 75px;
+        background-color: transparent;
+        background-image: url(https://cdn2.iconfinder.com/data/icons/little-girl/512/little_girl_orange.png);
+        background-repeat: no-repeat;
+        background-position: center; }
